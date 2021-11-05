@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+  p Umbrella results
+  div(class="container-fluid")
+        div(class="row")
+            -
+                let mattress = [
+                    {
+                        "brand": "weatherman",
+                        "color": "Blue",
+                        "cost": 30
+                    },
+                    {
+                        "brand": "citizen",
+                        "color": "Black",
+                        "cost": 25
+                    },
+                    {
+                        "brand": "jio",
+                        "color": "Red",
+                        "cost": 40
+                    },                   
+                ]
+            each v,index in mattress
+                div(class="col-sm-2" onclick=`buy(${index})`) #{v.brand}
+                div(class="col-sm-2" onclick=`buy(${index})`) #{v.color}
+                div(class="col-sm-2" onclick=`buy(${index})`) #{v.cost}
+
+                script.                
+                      function buy(intemNo)
+                      {
+                            alert(`you purchased Item ${intemNo+1}`)
+                      }
