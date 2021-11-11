@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var umbrella = require("./models/umbrella");
 
 const connectionString =  process.env.MONGO_CON 
 mongoose = require('mongoose'); 
@@ -13,26 +14,28 @@ var usersRouter = require('./routes/users');
 var umbrellaRouter = require('./routes/umbrella');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector')
-var umbrella = require("./models/umbrella");
 var resourceRouter = require('./routes/resource'); 
 
 // We can seed the collection if needed on server start
 async function recreateDB(){
   // Delete everything
   await umbrella.deleteMany();
-  let instance1 = new umbrella({brand:"weatherman", colour:"blue",
+  let instance1 = new umbrella({brand:"weatherman", 
+  color:"blue",
   cost: 30});
   instance1.save( function(err,doc) {
     if(err) return console.error(err);
     console.log("First object saved")
   });
-  let instance2 = new umbrella({brand:"citizen", colour:"black",
+  let instance2 = new umbrella({brand:"citizen", 
+  color:"black",
   cost:25});
   instance2.save( function(err,doc) {
     if(err) return console.error(err);
     console.log("Second object saved")
   });
-  let instance3 = new umbrella({brand:"jio", colour:"red",
+  let instance3 = new umbrella({brand:"jio", 
+  color:"red",
   cost:40});
   instance3.save( function(err,doc) {
     if(err) return console.error(err);
