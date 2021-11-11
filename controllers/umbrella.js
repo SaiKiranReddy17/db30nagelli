@@ -16,7 +16,7 @@ exports.umbrella_list = async function(req, res) {
 exports.umbrella_detail = async function(req, res) {
     console.log("detail" + req.params.id)
     try {
-        result = await hat.findById(req.params.id)
+        result = await umbrella.findById(req.params.id)
         res.send(result)
     } 
     catch (error) {
@@ -35,7 +35,7 @@ exports.umbrella_create_post = async function (req, res) {
     // and require that it be a json object
     // {"hat_name":"beret hat", "colour":"white", "price":"Thirty-four USD"}
     document.brand = req.body.brand;
-    document.colour = req.body.colour;
+    document.color = req.body.color;
     document.cost = req.body.cost;
     try {
         let result = await document.save();
@@ -64,12 +64,12 @@ exports.umbrella_update_put = async function (req, res) {
     try {
         let toUpdate = await hat.findById(req.params.id);
         // Do updates of properties
-        if (req.body.hat_name)
-            toUpdate.hat_name = req.body.brand;
-        if (req.body.colour)
+        if (req.body.brand)
+            toUpdate.brand = req.body.brand;
+        if (req.body.color)
             toUpdate.colour = req.body.colour;
-        if (req.body.price)
-            toUpdate.price = req.body.cost;
+        if (req.body.cost)
+            toUpdate.cost = req.body.cost;
         let result = await toUpdate.save();
         console.log("Sucess " + result);
         res.send(result);
