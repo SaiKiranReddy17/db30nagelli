@@ -6,6 +6,6 @@ I look for positivity in all things.
 
 Class: Umbrella
 
-Attributes: brand, color, cost
+Attributes: brand(String), color(String), cost(number)
 
 
