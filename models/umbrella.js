@@ -5,7 +5,7 @@ const umbrellaSchema = mongoose.Schema({
         type: String,
         minlength: 3
 },
-    colour: {
+    color: {
         type:  String,
         minLength: 3
 },
