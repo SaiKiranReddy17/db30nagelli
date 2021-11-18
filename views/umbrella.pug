@@ -6,9 +6,9 @@ block content
   div(class="container-fluid")
         div(class="row")
             -
-                let mattress = results
+                let umbrella = results
                 
-            each v,index in mattress
+            each v,index in umbrella
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.brand}
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.color}
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.cost}

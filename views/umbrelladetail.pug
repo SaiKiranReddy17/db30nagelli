@@ -1,0 +1,25 @@
+extends layout 
+ 
+block content 
+ h1= title 
+   if (toShow == null)
+    h2 No instance to delete
+  else
+  - let umbrellaid = toShow._id 
+  - let brand = toShow.brand 
+  - let color = toShow.color 
+  - let cost = toShow.cost 
+  div 
+    div.row 
+      div(class='umbrellaAttr mr-3') Umbrella ID is: 
+      div #{umbrellaid} 
+    div.row 
+      div(class='umbrellaAttr mr-3') Umbrella Brand is: 
+      div #{umbrella_brand} 
+    div.row 
+      div(class='umbrellaAttr mr-3') Umbrella Color is: 
+      div #{umbrellacolor} 
+    div.row 
+      div(class='umbrellaAttr mr-3') Umbrella Cost is: 
+      div #{umbrellacost} 
+ 

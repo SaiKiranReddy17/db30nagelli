@@ -61,19 +61,25 @@ exports.umbrella_view_all_Page = async function(req, res) {
 };
  
 // Handle motel delete form on DELETE. 
-exports.umbrella_delete = function(req, res) { 
-    res.send('NOT IMPLEMENTED: umbrella delete DELETE ' + req.params.id); 
+exports.umbrella_delete = async function(req, res) { 
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await umbrella.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
 }; 
  
 // Handle umbrella update form on PUT. 
 exports.umbrella_update_put = async function(req, res) { 
-    console.log(`update on id ${req.params.id} with body 
-${JSON.stringify(req.body)}`) 
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`) 
     try { 
         let toUpdate = await umbrella.findById( req.params.id) 
         // Do updates of properties 
-        if(req.body.brand)  
-               toUpdate.brand = req.body.brand; 
+        if(req.body.brand)  toUpdate.brand = req.body.brand; 
         if(req.body.color) toUpdate.color = req.body.color; 
         if(req.body.cost) toUpdate.cost = req.body.cost; 
         let result = await toUpdate.save(); 
@@ -85,3 +91,60 @@ ${JSON.stringify(req.body)}`)
 failed`); 
     } 
 }; 
+
+ // Handle a show one view with id specified by query 
+ exports.umbrella_view_one_Page = async function(req, res) { 
+    console.log("single view for id "  + req.query.id) 
+    try{ 
+        console.log("hi")
+        result = await umbrella.findById( req.query.id) 
+        console.log("hello")
+        console.log(result)
+        res.render('umbrelladetail1',  { title: 'Umbrella Detail', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+};
+ // Handle building the view for creating a Umbrella. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.umbrella_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('umbrellacreate', { title: 'umbrella Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+};
+// Handle building the view for updating a umbrella. 
+// query provides the id 
+exports.umbrella_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await umbrella.findById(req.query.id) 
+        res.render('umbrellaupdate', { title: 'umrella Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+ // Handle a delete one view with id from query 
+exports.umbrella_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await umbrella.findById(req.query.id) 
+        res.render('umbrelladelete', { title: 'umbrella Delete', toShow: 
+result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+  
+ 
