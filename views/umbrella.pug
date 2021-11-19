@@ -2,19 +2,20 @@ extends layout
 
 block content
   h1= title
-  p Umbrella results
-  div(class="container-fluid")
-        div(class="row")
-            -
-                let umbrella = results
-                
-            each v,index in umbrella
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.brand}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.color}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.cost}
+  - let umbrella = results;
+  script.
+    function buy(intemNo){
+      alert(`you purchased Item ${intemNo+1}`)
+   } 
 
-                script.                
-                      function buy(intemNo)
-                      {
-                            alert(`you purchased Item ${intemNo+1}`)
-                      }
+  div(class='container-fluid')
+    div(class='row m-1')
+      each v, index in umbrella 
+       - let destination = `dispatch(\"/umbrella/update?id=${v._id}\")`
+       div(class="row-sm-2", class="m-1") Item #{v.brand}(#{v.color}) is #{v.cost}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
+
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    }
