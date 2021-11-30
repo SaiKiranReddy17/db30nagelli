@@ -7,21 +7,17 @@ a {
   color: #00B7FF;
 }
 
-.umbrellaAttr { 
-  background-color: aquamarine; 
-  width: 120px; 
-} 
-.umbrella {
+.bottleAttr { 
+  background-color: yellow;
   width: 200px;
-  margin: 10px;
+  margin: 5px;
   text-align: center;
+  color: blue;
   padding: 10px;
-  border-radius: 10px;
-  font-weight:normal;
-
+  border-radius: 5px;
 }
-.style{
-  color:rgb(209, 212, 203);
-  background-color:red;
-  color: violet;
+.Title{
+  color: darkkhaki;
+  font-weight: 500;
+  font-family: sans-serif;
 }

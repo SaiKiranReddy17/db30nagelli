@@ -1,12 +1,18 @@
-const mongoose = require("mongoose") 
+const mongoose = require("mongoose")
 const umbrellaSchema = mongoose.Schema({
+    brand:{
+        type: String,
+        minLength: 3,
+        maxLength: 50
+    },
     
+    color: String,
     
-        brand: String,     
-        color:  String,
-        cost: Number
-        
-
-}) 
- 
-module.exports = mongoose.model("umbrella", umbrellaSchema)
+    cost: {
+        type:Number,
+        min:1,
+        max:1000
+    }
+    })
+module.exports = mongoose.model("umbrella",
+umbrellaSchema)

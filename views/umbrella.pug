@@ -1,21 +1,31 @@
 extends layout
 
 block content
+
+  -let destinations1 = `dispatch(\"/umbrella/create\")`
+   button.btn( class="btn-primary m-1", onclick= destinations1) Create
+ 
   h1= title
-  - let umbrella = results;
-  script.
-    function buy(intemNo){
-      alert(`you purchased Item ${intemNo+1}`)
-   } 
+  - let umbrella =results;
+  div(class="container-fluid mt-3")
+   div(class="row m-1")
+    each element in umbrella 
+     -let destination=`buy(\"/umbrella/update?id=${element._id}\")`
+     -let destinations2 = `dispatch(\"/umbrella/detail?id=${element._id}\")`
+     -let destinations3 = `dispatch(\"/umbrella/delete?id=${element._id}\")`
+     div(class="col-sm-6 bg-secondary m-1 p-3") umbrella  #{element.brand} - #{element.color} - #{element.color}
+      button.btn( class="btn-info ml-2", onclick=destination ) Update
+      button.btn( class="btn-success m-1", onclick= destinations2) Detail
+      button.btn( class="btn-danger m-1", onclick= destinations3) Delete
+  
+   script.
+    function buy(path){
+        window.location.href=path
 
-  div(class='container-fluid')
-    div(class='row m-1')
-      each v, index in umbrella 
-       - let destination = `dispatch(\"/umbrella/update?id=${v._id}\")`
-       div(class="row-sm-2", class="m-1") Item #{v.brand}(#{v.color}) is #{v.cost}
-        button.btn( class="btn-primary ml-1", onclick= destination) Update
+        //alert(`You purchased Item ${a+1}`)
+      }
 
-  script. 
+   script. 
     function dispatch(path){ 
       window.location.href=path 
     }
