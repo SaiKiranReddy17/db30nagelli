@@ -13,7 +13,7 @@ block content
      -let destination=`buy(\"/umbrella/update?id=${element._id}\")`
      -let destinations2 = `dispatch(\"/umbrella/detail?id=${element._id}\")`
      -let destinations3 = `dispatch(\"/umbrella/delete?id=${element._id}\")`
-     div(class="col-sm-6 bg-secondary m-1 p-3") umbrella  #{element.brand} - #{element.color} - #{element.color}
+     div(class="col-sm-6 bg-secondary m-1 p-3") umbrella  #{element.brand} - #{element.color} - #{element.cost}
       button.btn( class="btn-info ml-2", onclick=destination ) Update
       button.btn( class="btn-success m-1", onclick= destinations2) Detail
       button.btn( class="btn-danger m-1", onclick= destinations3) Delete

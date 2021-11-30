@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 var passport = require('passport'); 
 var LocalStrategy = require('passport-local').Strategy;
-var umbrellaSchema = require("./models/umbrella");
+
 passport.use(new LocalStrategy( 
   function(username, password, done) { 
     Account.findOne({ username: username }, function (err, user) { 
@@ -36,7 +37,7 @@ var umbrellaRouter = require('./routes/umbrella');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector')
 var resourceRouter = require('./routes/resource'); 
-var resourceRouter = require('./routes/resource');
+var resourceRouter = require('./models/umbrella');
 
 var app = express();
 // view engine setup
@@ -60,24 +61,27 @@ app.use(passport.session());
 async function recreateDB() {
 
   // Delete everything
-  await umbrella.deleteMany();
-  let instance1 = new umbrella({brand:"weatherman", 
+  await umbrellaschema.deleteMany();
+  let instance1 = new umbrellaschema({brand:"weatherman", 
   color:"blue",
-  cost: 30});
+  cost: 30
+});
   instance1.save( function(err,doc) {
     if(err) return console.error(err);
     console.log("First object saved")
   });
-  let instance2 = new umbrella({brand:"citizen", 
+  let instance2 = new umbrellaschema({brand:"citizen", 
   color:"black",
-  cost:25});
+  cost:25
+});
   instance2.save( function(err,doc) {
     if(err) return console.error(err);
     console.log("Second object saved")
   });
-  let instance3 = new umbrella({brand:"jio", 
+  let instance3 = new umbrellaschema({brand:"jio", 
   color:"red",
-  cost:40});
+  cost:40
+});
   instance3.save( function(err,doc) {
     if(err) return console.error(err);
     console.log("Third object saved")
