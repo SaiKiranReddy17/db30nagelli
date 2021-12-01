@@ -6,15 +6,15 @@ var umbrella_controller = require('../controllers/umbrella');
 /// API ROUTE ///
 // GET resources base.
 router.get('/', api_controller.api);
-/// hat ROUTES ///
-// POST request for creating a hat.
+/// umbrella ROUTES ///
+// POST request for creating a umbrella.
 router.post('/umbrella', umbrella_controller.umbrella_create_post);
-// DELETE request to delete hat.
+// DELETE request to delete umbrella.
 router.delete('/umbrella/:id', umbrella_controller.umbrella_delete);
-// PUT request to update hat.
+// PUT request to update umbrella.
 router.put('/umbrella/:id', umbrella_controller.umbrella_update_put);
-// GET request for one hat.
+// GET request for one umbrella.
 router.get('/umbrella/:id', umbrella_controller.umbrella_detail);
-// GET request for list of all hat items.
+// GET request for list of all umbrella items.
 router.get('/umbrella', umbrella_controller.umbrella_list);
 module.exports = router;

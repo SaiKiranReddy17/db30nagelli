@@ -20,9 +20,9 @@ passport.use(new LocalStrategy(
       return done(null, user); 
     }); 
   }));
- 
 
-  const connectionString =
+
+const connectionString =
   process.env.MONGO_CON
 mongoose = require('mongoose');
 mongoose.connect(connectionString,
@@ -35,9 +35,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var umbrellaRouter = require('./routes/umbrella');
 var addmodsRouter = require('./routes/addmods');
-var selectorRouter = require('./routes/selector')
-var resourceRouter = require('./routes/resource'); 
-var resourceRouter = require('./models/umbrella');
+var selectorRouter = require('./routes/selector');
+var umbrellaSchema = require('./models/umbrella');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 // view engine setup
@@ -59,36 +59,39 @@ app.use(passport.initialize());
 app.use(passport.session()); 
 
 async function recreateDB() {
-
+  
   // Delete everything
-  await umbrellaschema.deleteMany();
-  let instance1 = new umbrellaschema({brand:"weatherman", 
-  color:"blue",
-  cost: 30
-});
-  instance1.save( function(err,doc) {
-    if(err) return console.error(err);
+  await umbrellaSchema.deleteMany();
+  let instance1 = new umbrellaSchema({
+    brand: "weatherman",
+    color: "blue",
+    cost: 30
+  });
+  instance1.save(function (err, doc) {
+    if (err) return console.error(err);
     console.log("First object saved")
   });
-  let instance2 = new umbrellaschema({brand:"citizen", 
-  color:"black",
-  cost:25
-});
-  instance2.save( function(err,doc) {
-    if(err) return console.error(err);
+  let instance2 = new umbrellaSchema({
+    brand: "citizen",
+    color: "black",
+    cost: 25
+  });
+  instance2.save(function (err, doc) {
+    if (err) return console.error(err);
     console.log("Second object saved")
   });
-  let instance3 = new umbrellaschema({brand:"jio", 
-  color:"red",
-  cost:40
-});
-  instance3.save( function(err,doc) {
-    if(err) return console.error(err);
-    console.log("Third object saved")
+  let instance3 = new umbrellaSchema({
+    brand: "jio",
+    color: "red",
+    cost: 40
   });
-  }
-  let reseed = true;
-  if (reseed) { recreateDB();}
+  instance3.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Third object saved")
+   });
+}
+let reseed = true;
+if (reseed) { recreateDB(); }
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

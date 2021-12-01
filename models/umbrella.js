@@ -8,11 +8,11 @@ const umbrellaSchema = mongoose.Schema({
     
     color: String,
     
-    cost: {
+     cost: {
         type:Number,
         min:1,
-        max:1000
+        max:50
     }
     })
 module.exports = mongoose.model("umbrella",
-umbrellaSchema)
+    umbrellaSchema)
